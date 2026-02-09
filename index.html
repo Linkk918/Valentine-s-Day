@@ -14,13 +14,15 @@
             font-family: 'Poppins', sans-serif; overflow: hidden; position: relative;
         }
 
-        /* Background Elements */
+        /* Background Text */
         .bg-text {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             font-family: 'Great Vibes', cursive; font-size: 12vw; color: rgba(255, 255, 255, 0.25);
             white-space: nowrap; z-index: 0; pointer-events: none;
             animation: floatText 6s ease-in-out infinite;
         }
+        
+        /* Floating Hearts BG */
         .hearts-bg { position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .heart-float {
             position: absolute; bottom: -50px; background: rgba(255, 255, 255, 0.3);
@@ -37,12 +39,12 @@
         /* Card Styles */
         .card {
             position: relative; z-index: 10; background: rgba(255, 255, 255, 0.92);
-            padding: 2.5rem; border-radius: 25px; box-shadow: 0 15px 40px rgba(186, 104, 200, 0.25);
+            padding: 2rem; border-radius: 25px; box-shadow: 0 15px 40px rgba(186, 104, 200, 0.25);
             text-align: center; width: 85%; max-width: 480px; transition: all 0.5s ease;
             backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6);
         }
 
-        h1 { color: #c2185b; font-size: 1.1rem; line-height: 1.7; font-weight: 500; margin-bottom: 25px; }
+        h1 { color: #c2185b; font-size: 1.1rem; line-height: 1.6; font-weight: 500; margin-bottom: 20px; }
         
         /* Buttons */
         .buttons { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
@@ -56,36 +58,13 @@
         .option-btn { background: white; border: 2px solid #ff4081; color: #ff4081; width: 100%; margin-bottom: 10px; padding: 14px; }
         .option-btn:hover { background: #ff4081; color: white; transform: translateY(-3px); }
 
-        .hidden { display: none; }
+        .hidden { display: none !important; } /* Force hide */
         .loading { opacity: 0.5; pointer-events: none; }
+        
+        /* Rose Image */
+        .rose-img { width: 150px; height: auto; margin-bottom: 15px; animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-        /* THE ROSE CSS */
-        .rose-container {
-            height: 200px; display: flex; justify-content: center; align-items: flex-end;
-            margin-bottom: 20px; opacity: 0; animation: fadeInRose 2s forwards;
-        }
-        .flower { position: relative; }
-        .stem { width: 4px; height: 120px; background: #4caf50; margin: 0 auto; border-radius: 4px; }
-        .leaf {
-            width: 30px; height: 15px; background: #4caf50; position: absolute; top: 60px;
-            border-radius: 0 50% 0 50%; transform: rotate(-30deg); left: -15px;
-        }
-        .leaf:nth-child(2) { left: 5px; top: 80px; transform: rotate(-10deg) scaleX(-1); }
-        .petal {
-            width: 50px; height: 50px; background: #d81b60; border-radius: 50% 50% 0 50%;
-            position: absolute; top: -40px; left: -23px; transform: rotate(45deg);
-            box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-        }
-        .petal::after {
-            content: ""; width: 40px; height: 40px; background: #e91e63;
-            position: absolute; top: 5px; left: 5px; border-radius: 50% 50% 0 50%;
-        }
-        .petal::before {
-            content: ""; width: 25px; height: 25px; background: #f06292;
-            position: absolute; top: 15px; left: 15px; border-radius: 50% 50% 0 50%; z-index: 2;
-        }
-
-        @keyframes fadeInRose { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes floatText { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -52%) scale(1.02); } }
         @keyframes floatUp { 0% { transform: translateY(0) rotate(45deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; } }
 
@@ -104,7 +83,7 @@
         <div id="questionView">
             <h1>
                 Hey! Sana hindi mo ma-misunderstand, pero I want you to be my valentine's this year (as kaibigansz, nothing too serious).<br><br>
-                Oo, we don't know each other that well pa and we haven't even met IRL, let alone vc or anything like that... pero I really vibe with our conversations so far, and I figured, why not make this Valentine's a little more interesting?<br><br>
+                Oo, we don't know each other that well pa and we haven't even met IRL, let alone vc or anything like that... pero I really vibe with our matinong conversations so far (pag ndi busy and nakakapagreply HUSAHAUSHAHAA), and I figured, why not make this Valentine's a little more interesting?<br><br>
                 No pressure at all, just wanted to do something a bit different. So, since I'm already here... what do you say? Will you be my Valentine (as friends)?
             </h1>
             <div class="buttons">
@@ -128,14 +107,7 @@
         </div>
 
         <div id="flowerView" class="hidden">
-            <div class="rose-container">
-                <div class="flower">
-                    <div class="stem"></div>
-                    <div class="leaf"></div>
-                    <div class="leaf"></div>
-                    <div class="petal"></div>
-                </div>
-            </div>
+            <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" class="rose-img" alt="Rose">
             <h1 style="font-size: 1.3rem; color: #d81b60;">Ito na yung flower na hinahanap mo LMFAO 🌹</h1>
         </div>
     </div>
@@ -156,7 +128,10 @@
         async function handleResponse(answer) {
             const card = document.getElementById('mainCard');
             card.classList.add('loading');
-            await sendEmail(`Valentine Response: ${answer}`);
+            
+            // Send email
+            sendEmail(`Valentine Response: ${answer}`);
+            
             card.classList.remove('loading');
 
             if (answer === 'YES') {
@@ -169,12 +144,10 @@
         }
 
         async function selectDate(choice) {
-            const card = document.getElementById('mainCard');
-            card.classList.add('loading');
-            await sendEmail(`Date Choice: ${choice}`);
-            card.classList.remove('loading');
-
-            // Switch to loading view
+            // Send email for date choice
+            sendEmail(`Date Choice: ${choice}`);
+            
+            // Switch to loading view immediately
             document.getElementById('dateOptions').classList.add('hidden');
             document.getElementById('loadingView').classList.remove('hidden');
 
@@ -182,6 +155,8 @@
             setTimeout(() => {
                 document.getElementById('loadingView').classList.add('hidden');
                 document.getElementById('flowerView').classList.remove('hidden');
+                
+                // Trigger confetti again for the surprise
                 confetti({ particleCount: 100, spread: 100, origin: { y: 0.7 }, colors: ['#4caf50', '#d81b60'] });
             }, 2500);
         }
