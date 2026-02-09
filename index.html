@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ✨</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9); padding: 2rem; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;
+            width: 90%; max-width: 450px; transition: all 0.5s ease;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);
+        }
+        h1 { color: #d81b60; font-size: 1.15rem; line-height: 1.6; font-weight: 500; margin-bottom: 20px; }
+        .buttons { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+        button {
+            padding: 12px 25px; border: none; border-radius: 50px;
+            cursor: pointer; font-weight: bold; transition: 0.3s;
+            font-size: 1rem;
+        }
+        .yes-btn { background: #ff4081; color: white; box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3); }
+        .yes-btn:hover { transform: scale(1.05); background: #f50057; }
+        .no-btn { background: #bdbdbd; color: white; }
+        .option-btn { background: white; border: 2px solid #ff4081; color: #ff4081; width: 100%; margin-bottom: 10px; }
+        .option-btn:hover { background: #ff4081; color: white; transform: translateY(-2px); }
+        .hidden { display: none; }
+        .loading { opacity: 0.5; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div id="questionView">
+            <h1>
+                Hey! Sana hindi mo ma-misunderstand, pero I want you to be my valentine's this year (as kaibigansz, nothing too serious).<br><br>
+                Oo, we don't know each other that well pa and we haven't even met IRL, let alone vc or anything like that... pero I really vibe with our conversations so far, and I figured, why not make this Valentine's a little more interesting?<br><br>
+                No pressure at all, just wanted to do something a bit different. So, since I'm already here... what do you say? Will you be my Valentine (as friends)?
+            </h1>
+            <div class="buttons">
+                <button class="yes-btn" onclick="handleResponse('YES')">Yes!</button>
+                <button class="no-btn" id="noBtn" onclick="handleResponse('NO')">No</button>
+            </div>
+        </div>
+
+        <div id="dateOptions" class="hidden">
+            <h1 style="font-size: 1.5rem;">Yey! Since it's a Yes, anong game plan? ✨</h1>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="option-btn" onclick="selectDate('Movie Date')">Movie Date 🎬</button>
+                <button class="option-btn" onclick="selectDate('Game Date')">Game Date 🎮</button>
+                <button class="option-btn" onclick="selectDate('Virtual Museum')">Virtual Museum 🖼️</button>
+                <button class="option-btn" onclick="selectDate('Matulog nlang')">Nothing - matulog nlang talaga 😴</button>
+            </div>
+        </div>
+
+        <div id="finalView" class="hidden">
+            <h1 id="finalMsg" style="font-size: 1.5rem;">Setting it up! Check your messages later. 😊</h1>
+        </div>
+    </div>
+
+    <script>
+        // Your Formspree ID is integrated here
+        const FORMSPREE_ID = "mvzbgqkl"; 
+
+        async function sendEmail(message) {
+            try {
+                await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+            } catch (error) {
+                console.log("Error sending email, but that's okay!");
+            }
+        }
+
+        async function handleResponse(answer) {
+            const card = document.getElementById('mainCard');
+            card.classList.add('loading');
+            
+            // Send email notification immediately
+            await sendEmail(`Valentine Response: ${answer}`);
+            
+            card.classList.remove('loading');
+
+            if (answer === 'YES') {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ff4081', '#ffffff']
+                });
+                document.getElementById('questionView').classList.add('hidden');
+                document.getElementById('dateOptions').classList.remove('hidden');
+            } else {
+                document.getElementById('questionView').innerHTML = "<h1>That's totally fine! Friends pa rin naman tayo. 😊</h1>";
+            }
+        }
+
+        async function selectDate(choice) {
+            const card = document.getElementById('mainCard');
+            card.classList.add('loading');
+            
+            await sendEmail(`Date Choice: ${choice}`);
+            
+            card.classList.remove('loading');
+            document.getElementById('dateOptions').classList.add('hidden');
+            document.getElementById('finalView').classList.remove('hidden');
+            document.getElementById('finalMsg').innerText = `Alright, ${choice} it is! I'll message you later. ✨`;
+        }
+
+        // Slight playful hover for "No" button
+        const noBtn = document.getElementById('noBtn');
+        noBtn.addEventListener('mouseover', () => {
+            if(window.innerWidth > 600) {
+                const x = Math.random() * 30 - 15;
+                const y = Math.random() * 30 - 15;
+                noBtn.style.transform = `translate(${x}px, ${y}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
