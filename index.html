@@ -144,7 +144,7 @@
         </div>
 
         <div id="dateOptions" class="hidden">
-            <h1 style="font-size: 1.4rem; color: #880e4f;">Yey! Since it's a Yes, anong game plan? ✨</h1>
+            <h1 style="font-size: 1.4rem; color: #880e4f;">Yey! Since it's a Yes, what do u wanna do? ✨</h1>
             <div style="display: flex; flex-direction: column; gap: 5px;">
                 <button class="option-btn" onclick="selectDate('Movie Date')">Movie Date 🎬</button>
                 <button class="option-btn" onclick="selectDate('Game Date')">Game Date 🎮</button>
@@ -154,7 +154,7 @@
         </div>
 
         <div id="finalView" class="hidden">
-            <h1 id="finalMsg" style="font-size: 1.5rem;">Setting it up! Check your messages later. 😊</h1>
+            <h1 id="finalMsg" style="font-size: 1.5rem;">Okii! Check your messages later!! </h1>
         </div>
     </div>
 
@@ -192,7 +192,7 @@
                 document.getElementById('questionView').classList.add('hidden');
                 document.getElementById('dateOptions').classList.remove('hidden');
             } else {
-                document.getElementById('questionView').innerHTML = "<h1>That's totally fine! Friends pa rin naman tayo. 😊</h1>";
+                document.getElementById('questionView').innerHTML = "<h1>That's totally fine! Friends lng naman tayo. 😊</h1>";
             }
         }
 
@@ -205,7 +205,7 @@
             card.classList.remove('loading');
             document.getElementById('dateOptions').classList.add('hidden');
             document.getElementById('finalView').classList.remove('hidden');
-            document.getElementById('finalMsg').innerText = `Alright, ${choice} it is! I'll message you later. ✨`;
+            document.getElementById('finalMsg').innerText = `Alright, ${choice} it is! I'll message you later!!!`;
         }
 
         // Playful hover for "No" button
