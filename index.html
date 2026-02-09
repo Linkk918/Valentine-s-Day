@@ -9,45 +9,22 @@
     
     <style>
         body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center;
             background: linear-gradient(135deg, #fce4ec 0%, #f48fb1 100%);
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            position: relative;
+            font-family: 'Poppins', sans-serif; overflow: hidden; position: relative;
         }
 
-        /* Calligraphy Background */
+        /* Background Elements */
         .bg-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Great Vibes', cursive;
-            font-size: 12vw;
-            color: rgba(255, 255, 255, 0.25);
-            white-space: nowrap;
-            z-index: 0;
-            pointer-events: none;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-family: 'Great Vibes', cursive; font-size: 12vw; color: rgba(255, 255, 255, 0.25);
+            white-space: nowrap; z-index: 0; pointer-events: none;
             animation: floatText 6s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(255,255,255,0.4);
         }
-
-        /* Floating Background Hearts */
-        .hearts-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; z-index: 0; pointer-events: none;
-        }
+        .hearts-bg { position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .heart-float {
-            position: absolute;
-            bottom: -50px;
-            background: rgba(255, 255, 255, 0.3);
-            width: 20px; height: 20px;
-            transform: rotate(45deg);
+            position: absolute; bottom: -50px; background: rgba(255, 255, 255, 0.3);
+            width: 20px; height: 20px; transform: rotate(45deg);
             animation: floatUp 15s linear infinite;
         }
         .heart-float::before, .heart-float::after {
@@ -57,77 +34,70 @@
         .heart-float::before { top: -10px; left: 0; }
         .heart-float::after { top: 0; left: -10px; }
 
-        /* The Card */
+        /* Card Styles */
         .card {
-            position: relative;
-            z-index: 10; /* Keeps card above background */
-            background: rgba(255, 255, 255, 0.92);
-            padding: 2.5rem;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(186, 104, 200, 0.25);
-            text-align: center;
-            width: 85%;
-            max-width: 480px;
-            transition: all 0.5s ease;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.6);
+            position: relative; z-index: 10; background: rgba(255, 255, 255, 0.92);
+            padding: 2.5rem; border-radius: 25px; box-shadow: 0 15px 40px rgba(186, 104, 200, 0.25);
+            text-align: center; width: 85%; max-width: 480px; transition: all 0.5s ease;
+            backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6);
         }
 
-        h1 { 
-            color: #c2185b; 
-            font-size: 1.1rem; 
-            line-height: 1.7; 
-            font-weight: 500; 
-            margin-bottom: 25px; 
-        }
-
+        h1 { color: #c2185b; font-size: 1.1rem; line-height: 1.7; font-weight: 500; margin-bottom: 25px; }
+        
         /* Buttons */
         .buttons { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
         button {
-            padding: 12px 30px; border: none; border-radius: 50px;
-            cursor: pointer; font-weight: 700; transition: 0.3s;
-            font-size: 1rem; font-family: 'Poppins', sans-serif;
-            letter-spacing: 0.5px;
+            padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer;
+            font-weight: 700; transition: 0.3s; font-size: 1rem; font-family: 'Poppins', sans-serif;
         }
-        .yes-btn { 
-            background: linear-gradient(45deg, #ff4081, #f50057); 
-            color: white; 
-            box-shadow: 0 5px 15px rgba(245, 0, 87, 0.4); 
-        }
-        .yes-btn:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 8px 20px rgba(245, 0, 87, 0.6); }
+        .yes-btn { background: linear-gradient(45deg, #ff4081, #f50057); color: white; box-shadow: 0 5px 15px rgba(245, 0, 87, 0.4); }
+        .yes-btn:hover { transform: scale(1.05); }
         .no-btn { background: #cfd8dc; color: #546e7a; }
-        
-        .option-btn { 
-            background: white; border: 2px solid #ff4081; color: #ff4081; 
-            width: 100%; margin-bottom: 12px; padding: 14px;
-        }
-        .option-btn:hover { background: #ff4081; color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3); }
+        .option-btn { background: white; border: 2px solid #ff4081; color: #ff4081; width: 100%; margin-bottom: 10px; padding: 14px; }
+        .option-btn:hover { background: #ff4081; color: white; transform: translateY(-3px); }
 
         .hidden { display: none; }
         .loading { opacity: 0.5; pointer-events: none; }
 
-        /* Animations */
-        @keyframes floatText {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -52%) scale(1.02); }
+        /* THE ROSE CSS */
+        .rose-container {
+            height: 200px; display: flex; justify-content: center; align-items: flex-end;
+            margin-bottom: 20px; opacity: 0; animation: fadeInRose 2s forwards;
         }
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(45deg); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+        .flower { position: relative; }
+        .stem { width: 4px; height: 120px; background: #4caf50; margin: 0 auto; border-radius: 4px; }
+        .leaf {
+            width: 30px; height: 15px; background: #4caf50; position: absolute; top: 60px;
+            border-radius: 0 50% 0 50%; transform: rotate(-30deg); left: -15px;
         }
+        .leaf:nth-child(2) { left: 5px; top: 80px; transform: rotate(-10deg) scaleX(-1); }
+        .petal {
+            width: 50px; height: 50px; background: #d81b60; border-radius: 50% 50% 0 50%;
+            position: absolute; top: -40px; left: -23px; transform: rotate(45deg);
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+        }
+        .petal::after {
+            content: ""; width: 40px; height: 40px; background: #e91e63;
+            position: absolute; top: 5px; left: 5px; border-radius: 50% 50% 0 50%;
+        }
+        .petal::before {
+            content: ""; width: 25px; height: 25px; background: #f06292;
+            position: absolute; top: 15px; left: 15px; border-radius: 50% 50% 0 50%; z-index: 2;
+        }
+
+        @keyframes fadeInRose { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes floatText { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -52%) scale(1.02); } }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(45deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; } }
 
     </style>
 </head>
 <body>
 
     <div class="bg-text">Valentine's Day</div>
-
     <div class="hearts-bg">
-        <div class="heart-float" style="left: 10%; animation-duration: 8s; animation-delay: 0s;"></div>
+        <div class="heart-float" style="left: 10%; animation-duration: 8s;"></div>
         <div class="heart-float" style="left: 30%; animation-duration: 12s; animation-delay: 2s;"></div>
         <div class="heart-float" style="left: 70%; animation-duration: 10s; animation-delay: 4s;"></div>
-        <div class="heart-float" style="left: 90%; animation-duration: 15s; animation-delay: 1s;"></div>
     </div>
 
     <div class="card" id="mainCard">
@@ -144,7 +114,7 @@
         </div>
 
         <div id="dateOptions" class="hidden">
-            <h1 style="font-size: 1.4rem; color: #880e4f;">Yey! Since it's a Yes, what do u wanna do? ✨</h1>
+            <h1 style="font-size: 1.4rem; color: #880e4f;">Yey! Since it's a Yes, anong game plan? ✨</h1>
             <div style="display: flex; flex-direction: column; gap: 5px;">
                 <button class="option-btn" onclick="selectDate('Movie Date')">Movie Date 🎬</button>
                 <button class="option-btn" onclick="selectDate('Game Date')">Game Date 🎮</button>
@@ -153,13 +123,24 @@
             </div>
         </div>
 
-        <div id="finalView" class="hidden">
-            <h1 id="finalMsg" style="font-size: 1.5rem;">Okii! Check your messages later!! </h1>
+        <div id="loadingView" class="hidden">
+            <h1>Setting it up... <br>Check your messages later! 😊</h1>
+        </div>
+
+        <div id="flowerView" class="hidden">
+            <div class="rose-container">
+                <div class="flower">
+                    <div class="stem"></div>
+                    <div class="leaf"></div>
+                    <div class="leaf"></div>
+                    <div class="petal"></div>
+                </div>
+            </div>
+            <h1 style="font-size: 1.3rem; color: #d81b60;">Ito na yung flower na hinahanap mo LMFAO 🌹</h1>
         </div>
     </div>
 
     <script>
-        // Your Formspree ID
         const FORMSPREE_ID = "mvzbgqkl"; 
 
         async function sendEmail(message) {
@@ -169,46 +150,42 @@
                     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: message })
                 });
-            } catch (error) {
-                console.log("Error sending email, but that's okay!");
-            }
+            } catch (error) { console.log("Email error"); }
         }
 
         async function handleResponse(answer) {
             const card = document.getElementById('mainCard');
             card.classList.add('loading');
-            
             await sendEmail(`Valentine Response: ${answer}`);
-            
             card.classList.remove('loading');
 
             if (answer === 'YES') {
-                confetti({
-                    particleCount: 150,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#ff4081', '#ffffff', '#ff1744']
-                });
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff4081', '#ffffff'] });
                 document.getElementById('questionView').classList.add('hidden');
                 document.getElementById('dateOptions').classList.remove('hidden');
             } else {
-                document.getElementById('questionView').innerHTML = "<h1>That's totally fine! Friends lng naman tayo. 😊</h1>";
+                document.getElementById('questionView').innerHTML = "<h1>That's totally fine! Friends pa rin naman tayo. 😊</h1>";
             }
         }
 
         async function selectDate(choice) {
             const card = document.getElementById('mainCard');
             card.classList.add('loading');
-            
             await sendEmail(`Date Choice: ${choice}`);
-            
             card.classList.remove('loading');
+
+            // Switch to loading view
             document.getElementById('dateOptions').classList.add('hidden');
-            document.getElementById('finalView').classList.remove('hidden');
-            document.getElementById('finalMsg').innerText = `Alright, ${choice} it is! I'll message you later!!!`;
+            document.getElementById('loadingView').classList.remove('hidden');
+
+            // Wait 2.5 seconds then show the flower
+            setTimeout(() => {
+                document.getElementById('loadingView').classList.add('hidden');
+                document.getElementById('flowerView').classList.remove('hidden');
+                confetti({ particleCount: 100, spread: 100, origin: { y: 0.7 }, colors: ['#4caf50', '#d81b60'] });
+            }, 2500);
         }
 
-        // Playful hover for "No" button
         const noBtn = document.getElementById('noBtn');
         noBtn.addEventListener('mouseover', () => {
             if(window.innerWidth > 600) {
